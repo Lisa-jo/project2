@@ -18,11 +18,16 @@ $( document ).ready(function() {
   };
 
   triviaClient.getTriviaQuestions().then(data => dispQuestions(data));
-  
+  function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
   function dispQuestions(data) {
-    console.log(data)
-    $('.box').html(data.results.map(result => result.question))
-    $('#question-text').val(data.results[i].question);
+    console.log(data.results, ' are data.results')
+    const questions = data.results.map(result => decodeHtml(result.question))
+    $('.box').html(questions)
+    $('#question-text').val(questions[i]);
 
 
     $('#select1')
